@@ -1,7 +1,6 @@
 import React from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 import Container from 'react-bootstrap/Container';
 import { useNavigate, Link } from 'react-router-dom';
 import { SearchBar } from './SearchBar';
@@ -11,10 +10,17 @@ export const Header = () => {
 
   const categories = [
     'Home',
-    'Technology',
-    'Science',
+    'World',
+    'Politics',
+    'Economy',
     'Business',
-    'Entertainment',
+    'Tech',
+    'Science',
+    'Health',
+    'Sports',
+    'Opinion',
+    'Arts',
+    'Books',
   ];
 
   const handleNavItemClick = (category) => {
@@ -29,16 +35,23 @@ export const Header = () => {
 
   return (
     <Navbar sticky="top" bg="dark" variant="dark" className="mb-4">
-      <Container>
-        <Navbar.Brand as={Link} to="/">
+      <Container style={{ flexDirection: 'column' }}>
+        <Navbar.Brand as={Link} to="/" className="h1">
           Global Perspectives
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto">
-            <NavDropdown title="Categories" id="nav-dropdown">
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            width: '100%',
+            alignItems: 'center',
+          }}
+        >
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="me-auto links" style={{ justifyContent: 'center' }}>
               {categories.map((category, index) => (
-                <NavDropdown.Item
+                <Nav.Link
                   key={index}
                   onClick={() => handleNavItemClick(category)}
                   as={Link}
@@ -49,12 +62,12 @@ export const Header = () => {
                   }
                 >
                   {category}
-                </NavDropdown.Item>
+                </Nav.Link>
               ))}
-            </NavDropdown>
-          </Nav>
-        </Navbar.Collapse>
-        <SearchBar />
+            </Nav>
+            <SearchBar />
+          </Navbar.Collapse>
+        </div>
       </Container>
     </Navbar>
   );

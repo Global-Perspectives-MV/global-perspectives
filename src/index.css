@@ -19,8 +19,22 @@ body.dark-mode {
   --text-color: #f5f5f5;
 }
 
-h1 {
+h1,
+.h1 {
   font-weight: 800 !important;
+}
+
+.search {
+  margin-right: 10px;
+}
+
+.search-btn {
+  margin-left: 10px;
+}
+
+.links {
+  font-size: 1rem;
+  font-weight: 150;
 }
 
 .card-img-custom {
