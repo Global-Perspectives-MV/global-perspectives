@@ -1,7 +1,8 @@
 import React from 'react';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import Header from '../components/common/Header';
-import { AllNews } from '../components/HomePage';
+import { HomePage } from '../components/HomePage';
+import { Footer } from '../components/common/Footer';
 
 export const Home = () => {
   return (
@@ -10,7 +11,7 @@ export const Home = () => {
       <Header />
 
       {/* container for introduction card */}
-      <Container className="mt-3">
+      <Container className="mt-3 mb-3">
         <Row>
           <Col md={12}>
             <Card>
@@ -33,7 +34,9 @@ export const Home = () => {
       </Container>
 
       {/*  */}
-      <AllNews />
+      <HomePage />
+
+      <Footer />
     </div>
   );
 };

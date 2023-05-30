@@ -19,8 +19,7 @@ export const Header = () => {
     'Health',
     'Sports',
     'Opinion',
-    'Arts',
-    'Books',
+    'Art',
   ];
 
   const handleNavItemClick = (category) => {
@@ -34,40 +33,31 @@ export const Header = () => {
   };
 
   return (
-    <Navbar sticky="top" bg="dark" variant="dark" className="mb-4">
-      <Container style={{ flexDirection: 'column' }}>
+    <Navbar expand="lg" sticky="top" bg="dark" variant="dark" className="mb-4">
+      <Container className="navbar-container">
         <Navbar.Brand as={Link} to="/" className="h1">
           Global Perspectives
         </Navbar.Brand>
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            width: '100%',
-            alignItems: 'center',
-          }}
-        >
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="me-auto links" style={{ justifyContent: 'center' }}>
-              {categories.map((category, index) => (
-                <Nav.Link
-                  key={index}
-                  onClick={() => handleNavItemClick(category)}
-                  as={Link}
-                  to={
-                    category.toLowerCase() === 'home'
-                      ? '/'
-                      : `/news?category=${category.toLowerCase()}`
-                  }
-                >
-                  {category}
-                </Nav.Link>
-              ))}
-            </Nav>
-            <SearchBar />
-          </Navbar.Collapse>
-        </div>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="me-auto text-light">
+            {categories.map((category, index) => (
+              <Nav.Link
+                key={index}
+                onClick={() => handleNavItemClick(category)}
+                as={Link}
+                to={
+                  category.toLowerCase() === 'home'
+                    ? '/'
+                    : `/news?category=${category.toLowerCase()}`
+                }
+              >
+                {category}
+              </Nav.Link>
+            ))}
+          </Nav>
+          <SearchBar />
+        </Navbar.Collapse>
       </Container>
     </Navbar>
   );

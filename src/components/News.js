@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Header } from './common/Header';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import { Footer } from './common/Footer';
 
 export const News = () => {
   const [news, setNews] = useState([]);
@@ -12,25 +13,10 @@ export const News = () => {
 
   useEffect(() => {
     const fetchNews = async () => {
-      let articles = JSON.parse(localStorage.getItem(category));
-      const lastFetchTime = localStorage.getItem(`${category}_timestamp`);
-
-      const currentDate = new Date();
-      const currentDay = currentDate.getDate();
-
-      if (lastFetchTime) {
-        const fetchDate = new Date(parseInt(lastFetchTime));
-        const fetchDay = fetchDate.getDate();
-
-        if (fetchDay === currentDay && articles) {
-          setNews(articles);
-          return;
-        }
-      }
-
       const response = await fetch(
         `https://gnews.io/api/v4/search?q=${category}&lang=en&apikey=${apiKey}`
       );
+
       const data = await response.json();
 
       const sortedArticles = data.articles.sort((a, b) => {
@@ -39,7 +25,13 @@ export const News = () => {
         return aLength - bLength;
       });
 
-      articles = sortedArticles
+      const uniqueArticles = Array.from(
+        new Set(sortedArticles.map((article) => article.title))
+      ).map((title) =>
+        sortedArticles.find((article) => article.title === title)
+      );
+
+      articles = uniqueArticles
         .filter((article) => article.image)
         .map((article) => {
           const descriptionWords = article.description.split(' ');
@@ -59,7 +51,8 @@ export const News = () => {
               key={article.url}
               xs={12}
               sm={6}
-              md={3}
+              md={4}
+              lg={3}
               className="d-flex align-items-stretch"
             >
               <Card className="mb-3 w-100">
@@ -80,12 +73,6 @@ export const News = () => {
           );
         });
 
-      localStorage.setItem(category, JSON.stringify(articles));
-      localStorage.setItem(
-        `${category}_timestamp`,
-        currentDate.getTime().toString()
-      );
-
       setNews(articles);
     };
 
@@ -100,6 +87,8 @@ export const News = () => {
         <h1>{categoryName}</h1>
         <Row className="mt-3 d-flex">{news}</Row>
       </Container>
+
+      <Footer />
     </div>
   );
 };
