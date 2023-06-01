@@ -38,6 +38,12 @@ h1,
   font-weight: 150;
 }
 
+.publishedTime {
+  font-size: 0.8rem;
+  font-weight: 100;
+  margin-top: 5px;
+}
+
 .card-img-custom {
   height: 200px; /* Or whatever height you prefer */
   object-fit: cover;
@@ -55,5 +61,9 @@ h1,
 
   .navbar-container {
     flex-direction: row;
+  }
+
+  .navbar-links {
+    column-count: 2;
   }
 }

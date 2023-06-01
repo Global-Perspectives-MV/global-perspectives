@@ -34,13 +34,13 @@ export const Header = () => {
 
   return (
     <Navbar expand="lg" sticky="top" bg="dark" variant="dark" className="mb-4">
-      <Container className="navbar-container">
+      <Container className="navbar-container navbar-links">
         <Navbar.Brand as={Link} to="/" className="h1">
           Global Perspectives
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto text-light">
+          <Nav className="me-auto text-light navbar-links">
             {categories.map((category, index) => (
               <Nav.Link
                 key={index}
